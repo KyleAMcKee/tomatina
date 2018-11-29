@@ -25,6 +25,9 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 
 	onSubmit(e: any) {
 		e.preventDefault();
+		if (this.state.newTodo.title === '') {
+			return
+		}
 		this.setState({
 			todos: [...this.state.todos, this.state.newTodo],
 			newTodo: {
@@ -32,8 +35,6 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 				done: false
 			}
 		})
-
-		console.log(this.state.todos);
 	}
 
 	onChange(e: any) {
@@ -51,7 +52,26 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 		this.setState({
 			todos: todos
 		})
-		console.log(e.target.checked);
+	}
+
+	removeTodo(index: number) {
+		const todos = [...this.state.todos];
+		todos.splice(index, 1);
+		this.setState({
+			todos: todos
+		});
+	}
+
+	allDone() {
+		const todos = this.state.todos.map(todo => {
+			return {
+				title: todo.title,
+				done: true
+			}
+		});
+		this.setState({
+			todos: todos
+		});
 	}
 
   render() {
@@ -62,11 +82,13 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 					<input onChange={this.onChange} id="newTodo" name="newTodo" value={this.state.newTodo.title}/>
 					<button type="submit">Add Todo</button>
 				</form>
+				<button onClick={() => this.allDone()}>All Done</button>
 				<ul>
 					{this.state.todos.map((item, index) => {
 							return <li key={item.title}>
-								<input onChange={(event) => this.onClickDone(event, index)} type="checkbox"/>
+								<input onChange={(event) => this.onClickDone(event, index)} type="checkbox" checked={item.done}/>
 								<span style={{ textDecoration: item.done ? 'line-through' : 'inherit'}}>{item.title}</span>
+								<button onClick={() => this.removeTodo(index)}>Remove</button>
 							</li>
 						})
 					}
