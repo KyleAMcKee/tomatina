@@ -82,7 +82,7 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 				<button onClick={() => this.allDone()}>All Done</button>
 				<ul>
 					{this.state.todos.map((item, index) => {
-							return <li key={item.title}>
+							return <li key={item.title + Math.floor(Math.random() * 10000)}>
 								<input onChange={(event) => this.onClickDone(event, index)} type="checkbox" checked={item.done}/>
 								<span style={{ textDecoration: item.done ? 'line-through' : 'inherit'}}>{item.title}</span>
 								<button onClick={() => this.removeTodo(index)}>Remove</button>

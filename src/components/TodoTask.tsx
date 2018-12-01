@@ -1,0 +1,26 @@
+import * as React from 'react';
+
+type TodoItem = {
+	title: string;
+	done: boolean;
+}
+
+interface IProps {
+	checked: boolean,
+	item: TodoItem,
+	index: number,
+	onClickDone: (e: any, index: number) => any,
+	removeTodo: (e: any) => any,
+}
+
+const TodoTask: React.SFC<IProps> = (props: IProps) => {
+	return (
+		<li key={props.item.title + Math.floor(Math.random() * 100)}>
+			<input onChange={(event) => props.onClickDone(event, props.index)} type="checkbox" checked={props.item.done}/>
+			<span style={{ textDecoration: props.item.done ? 'line-through' : 'inherit'}}>{props.item.title}</span>
+			<button onClick={() => props.removeTodo(props.index)}>Remove</button>
+		</li>
+	)
+}
+
+export default TodoTask;
