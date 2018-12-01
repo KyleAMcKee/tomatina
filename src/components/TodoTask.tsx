@@ -18,9 +18,16 @@ const TodoTask: React.SFC<IProps> = (props: IProps) => {
 		<li key={props.item.title + Math.floor(Math.random() * 100)}>
 			<input onChange={(event) => props.onClickDone(event, props.index)} type="checkbox" checked={props.item.done}/>
 			<span style={{ textDecoration: props.item.done ? 'line-through' : 'inherit'}}>{props.item.title}</span>
-			<button onClick={() => props.removeTodo(props.index)}>Remove</button>
+			<button className="button is-primary" onClick={() => props.removeTodo(props.index)}>Delete</button>
 		</li>
 	)
 }
 
 export default TodoTask;
+
+  // <a class="button is-danger is-outlined">
+  //   <span>Delete</span>
+  //   <span class="icon is-small">
+  //     <i class="fas fa-times"></i>
+  //   </span>
+  // </a>

@@ -13,10 +13,10 @@ export interface IProps {
 
 const TodoForm: React.SFC<IProps> = (props: IProps) => {
 	return (
-		<form onSubmit={props.onSubmit}>
+		<form className="field" onSubmit={props.onSubmit}>
 			<label htmlFor="newTodo"></label>
 			<input onChange={props.onChange} id="newTodo" name="newTodo" value={props.newTodo.title}/>
-			<button type="submit">Add Todo</button>
+			<button className="button is-primary" type="submit">Add Todo</button>
 		</form>
 	)
 }

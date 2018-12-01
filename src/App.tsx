@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import Header from './Header';
 import Description from './Description';
 import TodoForm from './components/TodoForm';
@@ -78,19 +78,24 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
   render() {
     return (
       <div className="App">
-			<TodoForm onChange={this.onChange} onSubmit={this.onSubmit} newTodo={this.state.newTodo}/>
-				<button onClick={() => this.allDone()}>All Done</button>
-				<ul>
-					{this.state.todos.map((item, index) => {
-							return <li key={item.title + Math.floor(Math.random() * 10000)}>
-								<input onChange={(event) => this.onClickDone(event, index)} type="checkbox" checked={item.done}/>
-								<span style={{ textDecoration: item.done ? 'line-through' : 'inherit'}}>{item.title}</span>
-								<button onClick={() => this.removeTodo(index)}>Remove</button>
-							</li>
-						})
-					}
-				</ul>
-      </div>
+				<div className="card has-text-centered is-wide">
+    			<header className="card-header">
+      			Todo List
+    			</header>
+				<TodoForm onChange={this.onChange} onSubmit={this.onSubmit} newTodo={this.state.newTodo}/>
+					<button className="button is-success" onClick={() => this.allDone()}>All Done</button>
+					<ul>
+						{this.state.todos.map((item, index) => {
+								return <li key={item.title + Math.floor(Math.random() * 10000)}>
+									<input onChange={(event) => this.onClickDone(event, index)} type="checkbox" checked={item.done}/>
+									<span style={{ textDecoration: item.done ? 'line-through' : 'inherit'}}>{item.title}</span>
+									<button className="button is-danger" onClick={() => this.removeTodo(index)}>Remove</button>
+								</li>
+							})
+						}
+					</ul>
+      	</div>
+			</div>
     );
   }
 }
