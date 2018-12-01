@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './Header';
 import Description from './Description';
+import TodoForm from './components/TodoForm';
 
 type TodoItem = {
 	title: string;
@@ -77,11 +78,7 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
   render() {
     return (
       <div className="App">
-				<form onSubmit={this.onSubmit}>
-					<label htmlFor="newTodo"></label>
-					<input onChange={this.onChange} id="newTodo" name="newTodo" value={this.state.newTodo.title}/>
-					<button type="submit">Add Todo</button>
-				</form>
+			<TodoForm onChange={this.onChange} onSubmit={this.onSubmit} newTodo={this.state.newTodo}/>
 				<button onClick={() => this.allDone()}>All Done</button>
 				<ul>
 					{this.state.todos.map((item, index) => {
