@@ -24,10 +24,3 @@ const TodoTask: React.SFC<IProps> = (props: IProps) => {
 }
 
 export default TodoTask;
-
-  // <a class="button is-danger is-outlined">
-  //   <span>Delete</span>
-  //   <span class="icon is-small">
-  //     <i class="fas fa-times"></i>
-  //   </span>
-  // </a>

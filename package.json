@@ -8,6 +8,7 @@
     "@types/react": "^16.7.8",
     "@types/react-dom": "16.0.11",
     "bulma": "^0.7.2",
+    "cool-checkboxes-for-bulma.io": "^1.1.0",
     "node-sass": "^4.10.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

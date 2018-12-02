@@ -22,6 +22,7 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 		}
 		this.onSubmit = this.onSubmit.bind(this);
 		this.onChange = this.onChange.bind(this);
+		this.allDone = this.allDone.bind(this);
 	}
 
 	onSubmit(e: any) {
@@ -77,25 +78,47 @@ class App extends Component<{}, { newTodo: TodoItem, todos: TodoItem[] }> {
 
   render() {
     return (
-      <div className="App">
-				<div className="card has-text-centered is-wide">
-    			<header className="card-header">
-      			Todo List
-    			</header>
-				<TodoForm onChange={this.onChange} onSubmit={this.onSubmit} newTodo={this.state.newTodo}/>
-					<button className="button is-success" onClick={() => this.allDone()}>All Done</button>
-					<ul>
+      <div className="App absolute-center">
+	  	<TodoForm onChange={this.onChange} onSubmit={this.onSubmit} newTodo={this.state.newTodo} allDone={this.allDone}/>
+		  {/* <button className="button is-success" onClick={() => this.allDone()}>All Done</button> */}
+	  	<div className="block">
+		  {this.state.todos.length > 0 &&
+			<table className="table is-hoverable">
+					<thead>
+						<tr>
+							<th>Done</th>
+							<th>Task</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
 						{this.state.todos.map((item, index) => {
-								return <li key={item.title + Math.floor(Math.random() * 10000)}>
-									<input onChange={(event) => this.onClickDone(event, index)} type="checkbox" checked={item.done}/>
-									<span style={{ textDecoration: item.done ? 'line-through' : 'inherit'}}>{item.title}</span>
-									<button className="button is-danger" onClick={() => this.removeTodo(index)}>Remove</button>
-								</li>
+							return <tr key={item.title + Math.floor(Math.random() * 10000)}>
+										<td className="center-items">
+											<label className="check-container">
+												<input onChange={(event) => this.onClickDone(event, index)} type="checkbox" checked={item.done}/>
+												<span className="checkmark"></span>
+											</label>
+										</td>
+										<td className="center-items">
+											<span style={{ textDecoration: item.done ? 'line-through' : 'inherit'}}>{item.title}</span>
+										</td>
+										<td >
+											<button className="button is-danger is-outlined" onClick={() => this.removeTodo(index)}>
+												<span className="icon is-small">
+												<i className="fa fa-trash"></i>
+												</span>
+											</button>
+
+										</td>
+									</tr>
 							})
 						}
-					</ul>
-      	</div>
-			</div>
+					</tbody>
+			</table>
+		  }
+		</div>
+	</div>
     );
   }
 }
